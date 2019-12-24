@@ -1,0 +1,41 @@
+.container__inner {
+    width: 400px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+input[type="submit"] {
+    width: 200px;
+}
+
+#block__avatar {
+    display: flex;
+    flex-direction: row;
+    margin: 5px 10px;
+}
+
+#block__avatar>.box-download {
+    margin: auto 5px;
+}
+
+#block__avatar>.box-download>label {
+    margin-bottom: 15px;
+}
+
+#block__avatar>.box-download>input {
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+#block__avatar>img {
+    width: 128px;
+}

@@ -1,0 +1,23 @@
+h1 {
+    text-align: center;
+}
+
+.user-list {
+    padding: 20px;
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    border: 1px solid #0c0c0c;
+}
+
+.user div {
+    margin: auto;
+}
+
+.user .avatar>img {
+    width: 64px;
+    height: 64px;
+}

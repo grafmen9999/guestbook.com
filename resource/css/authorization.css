@@ -1,0 +1,21 @@
+.center {
+    width: 600px;
+    height: 200px;
+}
+
+.center>h1 {
+    text-align: center;
+    margin: 5px 10px;
+}
+
+form {
+    text-align: center;
+}
+
+input[type="submit"] {
+    width: 200px;
+}
+
+.help {
+    text-align: right;
+}
