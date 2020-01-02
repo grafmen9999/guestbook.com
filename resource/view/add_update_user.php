@@ -35,7 +35,7 @@ $groups = DB::getInstance()->getData('groups');
                 <select name="group" id="group">
                     <?php                
                     foreach($groups as $group) { ?>
-                    <option value='<?php echo $group[0]; ?>' <?php if (isset($_SESSION['auth'])) { if ($_SESSION['auth']->getGroup() == $group[0])  echo "selected"; } ?>><?php echo $group[1]; ?></option>
+                    <option value='<?php echo $group['id']; ?>' <?php if (isset($_SESSION['auth'])) { if ($_SESSION['auth']->getGroup() == $group['id'])  echo "selected"; } ?>><?php echo $group['name']; ?></option>
                     <?php } ?>
                 </select>
                 <small>Needs new group? Go to <a href="/resource/view/add_update_group.php">link</a>!</small>

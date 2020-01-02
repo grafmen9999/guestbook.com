@@ -18,28 +18,22 @@ $imgAvatar = Filesystem::getInstance()->upload_file($avatar);
 if (!isset($id)) {
     $user = new User($name, $password, $group, $imgAvatar);
 
-    DB::getInstance()->addData('users', array(
+    DB::getInstance()->addData('users', [
         'name' => $user->getName(),
         'id_group' => $user->getGroup(),
         'password' => $user->getPassword(),
         'avatar' => $user->getAvatar()->getPath(),
-    ));
-
-    $user->setID(((DB::getInstance()->getData('users', array(
-        'name' => ['=', $user->getName(), 'AND'],
-        'id_group' => ['=', $user->getGroup(), 'AND'],
-        'password' => ['=', $user->getPassword(), 'AND'],
-        'avatar' => ['=', $user->getAvatar()->getPath(), ''],
-    )))[0][0]));
-
+    ]);
+    $user->setID(DB::getInstance()->getData('users', "WHERE name=? AND id_group=? AND password=? AND avatar=?", [
+        $user->getName(),
+        $user->getGroup(),
+        $user->getPassword(),
+        $user->getAvatar()->getPath(),
+    ])[0]['id']);
     $_SESSION['auth'] = $user;
 
 }
 else {
-    $finds_user = DB::getInstance()->getData('users', array(
-        'id' => ['=', $id, '']
-    ))[0];
-    
     $user = &$_SESSION['auth'];
 
     $user->setName($name);
@@ -47,14 +41,12 @@ else {
     $user->setGroup($group);
     if ($isUpload) $user->setAvatar($imgAvatar);
 
-    DB::getInstance()->updateData('users', array(
+    DB::getInstance()->updateData('users', [
         'name' => $user->getName(),
         'id_group' => $user->getGroup(),
         'password' => $user->getPassword(),
         'avatar' => $user->getAvatar()->getPath(),
-    ), array(
-        'id' => ['=', $id, '']
-    ));
+    ], "WHERE id=:id", ['id' => $id]);
 
     header("Location: $_SERVER[HTTP_REFERER]");
 }

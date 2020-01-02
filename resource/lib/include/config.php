@@ -12,6 +12,7 @@ class Config extends Singleton
             'username' => 'root',
             'password' => '',
             'dbname' => 'guestbook_db',
+            'charset' => 'utf8',
         ));
     }
 

@@ -15,10 +15,8 @@ class Filesystem extends Singleton
     
         if (move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $uploadfile)) {
             $file = new File($uploadfile);
-        } else {
-            if (file_exists($_SERVER['DOCUMENT_ROOT'] . $uploadfile)) {
-                $file = new File($uploadfile);
-            }
+        } else if (file_exists($_SERVER['DOCUMENT_ROOT'] . $uploadfile)) {
+            $file = new File($uploadfile);
         }
 
         return $file;

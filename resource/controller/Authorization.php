@@ -8,24 +8,13 @@ session_start();
 $name = $_POST['name'];
 $password = $_POST['password'];
 
-$users = DB::getInstance()->getData('users', array(
-    'name' => ['=', $name, ''],
-    // 'password' => ['=', $password, ''],
-));
+$users = DB::getInstance()->getData('users', "WHERE name=?", [$name]);
 
 $user = $users[0];
-if (password_verify($password, $user[3])) {
-    $user = new User($name, $password, $user[1], new File($user[4]), $user[0]);
+if (password_verify($password, $user['password'])) {
+    $user = new User($user['name'], $user['password'], $user['id_group'], new File($user['avatar']), $user['id']);
     $_SESSION['auth'] = $user;
 }
-
-// foreach($users as $user) {
-//     if (password_verify($password, $user[3])) {
-//         $user = new User($name, $password, $user[1], new File($user[4]), $user[0]);
-//         $_SESSION['auth'] = $user;
-//     break;
-//     }
-// }
 
 header("Location: /");
 

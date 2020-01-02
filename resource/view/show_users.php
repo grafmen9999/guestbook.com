@@ -1,5 +1,6 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT'] . "/resource/lib/include/db.php");
+    require_once($_SERVER['DOCUMENT_ROOT'] . "/resource/model/User.php");
     session_start();
 ?>
 
@@ -28,17 +29,19 @@
                     </div>
                 </li>
                 <?php
-                $users = DB::getInstance()->getData('users');
+                $users = DB::getInstance()->query("SELECT users.id, groups.name as groupName, users.name, users.avatar FROM users JOIN groups WHERE users.id_group=groups.id")->fetchAll();
+                // $users = DB::getInstance()->getData('users');
                 foreach($users as $user)
                 { ?>
                 <li>
                     <div class="user">
-                        <div class="avatar"><img src="<?php echo $user[4]; ?>" alt="Avatar"></div>
-                        <div class="name"><?php echo $user[2]; ?></div>
-                        <div class="group"><?php echo DB::getInstance()->getData('groups', array('id' => ['=', $user[1], '']))[0][1]; ?></div>
+                        <div class="id"><?php echo $user['id']; ?></div>
+                        <div class="avatar"><img src="<?php echo $user['avatar']; ?>" alt="Avatar"></div>
+                        <div class="name"><?php echo $user['name']; ?></div>
+                        <div class="group"><?php echo $user['groupName']; ?></div>
                         <div class="delete">
                             <form action="/resource/controller/DeleteUser.php" method="post">
-                                <input type="hidden" name="id" value="<?php echo $user[0]; ?>">
+                                <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                                 <input type="submit" value="Delete">
                             </form>
                         </div>

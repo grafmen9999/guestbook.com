@@ -21,8 +21,8 @@
                 $groups = DB::getInstance()->getData('groups');
                 foreach($groups as $group) { ?>
                 <form action='/resource/controller/Add_Update_Group.php' method='post'>
-                    <input type='text' value='<?php echo $group[1] ?>' name='name'>
-                    <input type='hidden' value='<?php echo $group[0] ?>' name='id'>
+                    <input type='text' value='<?php echo $group['name'] ?>' name='name'>
+                    <input type='hidden' value='<?php echo $group['id'] ?>' name='id'>
                     <input type='submit' value='Save' name='submit'>
                 </form>
                 <?php } ?>

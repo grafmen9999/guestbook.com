@@ -2,13 +2,39 @@
     require_once($_SERVER['DOCUMENT_ROOT'] . "/resource/lib/include/config.php");
     require_once($_SERVER['DOCUMENT_ROOT'] . "/resource/lib/include/db.php");
 
+
+    // echo "DEBUG MODE IS ACTIVE<br>";
+
+    // $mysql = MySqlDB::getInstance();
+
+//     $mysql->query("CREATE TABLE test_table (
+// id int(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+// name varchar(255) NOT NULL,
+// surname varchar(255) NOT NULL,
+// email varchar(255) NOT NULL
+// );
+// ");
+
+
+    // $mysql->addData("test_table", ['name' => "Maxim", 'surname' => "Koban", 'email' => "grafmen9999@gmail.com"]);
+    // $mysql->updateData('test_table', ['name' => "Alkonaft"], "WHERE id>=:id_min AND id<=:id_max", ['id_min' => 5, 'id_max' => 9]);
+    // $mysql->updateData('test_table', ['name' => 'USERNAME_IS_DELETED2']);
+    // $mysql->deleteData('test_table', "WHERE id >= ? AND id <= ?", [12, 25]);
+    // $mysql->deleteData('test_table');
+
+    // echo "<pre>";
+    // print_r($mysql->getData("test_table"));
+    // echo "</pre>";
+
+    // exit();
+
     session_start();
 
     function initialize()
     {
         $config = Config::getInstance();
 
-        $db = DB::getInstance(); // Изначально планировал заполнять конфиги в этом месте, но потом немного передумал
+        $db = DB::getInstance();
 
         if ($db->createTable('groups', array(
             'id' => "int(10) UNSIGNED AUTO_INCREMENT",
@@ -26,8 +52,7 @@
         )));
     }
 
-    // initialize(); // Данная строка создает таблицы в "автоматическом режиме", т.е. она сама создаст таблицы с нужными полями
-
+    // initialize(); // create tables
 
     if (!isset($_SESSION['auth'])) {
         header("Location: /resource/view/authorization.php");
